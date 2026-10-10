@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0d12">
+<title>Axlff07 Sensi</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Axlff07 Sensi">
+<style>
+:root{color-scheme:dark;--bg:#0b0d12;--panel:#151923;--line:#2a3040;--text:#f4f6fb;--muted:#9aa4b8;--hot:#ff4d67;--cyan:#57e6e1}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top right,#24203c 0,transparent 42%),var(--bg);color:var(--text);font:16px system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:24px 18px 14px;max-width:780px;margin:auto} .brand{font-weight:900;letter-spacing:.08em;font-size:12px;color:var(--cyan)}h1{font-size:clamp(28px,7vw,42px);margin:6px 0}p{line-height:1.5}.sub{color:var(--muted);margin:0}
+main{max-width:780px;margin:auto;padding:8px 14px 42px}.tabs{display:flex;gap:8px;overflow:auto;padding:8px 0 14px}.tab{border:1px solid var(--line);background:#11151d;color:var(--muted);padding:10px 14px;border-radius:999px;white-space:nowrap;font-weight:700}.tab.active{background:var(--hot);color:#fff;border-color:var(--hot)}
+.panel{background:linear-gradient(145deg,#191e2a,#11141b);border:1px solid var(--line);border-radius:18px;padding:18px;margin:0 0 14px}.eyebrow{font-size:12px;color:var(--cyan);font-weight:800;text-transform:uppercase;letter-spacing:.09em}h2{margin:5px 0 12px;font-size:22px}.note{color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat{background:#0d1118;border:1px solid var(--line);border-radius:14px;padding:12px}.stat label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.stat strong{font-size:24px}.sliderrow{margin:18px 0}.sliderhead{display:flex;justify-content:space-between;gap:8px;font-weight:650}.sliderhead output{color:var(--cyan)}input[type=range]{width:100%;accent-color:var(--hot);margin-top:12px}button,select{font:inherit}.primary,.secondary{border:0;border-radius:12px;padding:12px 14px;font-weight:800;cursor:pointer}.primary{background:var(--hot);color:white}.secondary{background:#242b3a;color:white;border:1px solid var(--line)}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.field{display:flex;flex-direction:column;gap:7px;margin:12px 0}.field label{font-size:13px;color:var(--muted)}select{background:#0d1118;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px}.hidden{display:none!important}.hud{position:relative;min-height:260px;border-radius:16px;border:1px solid #414a5e;background:linear-gradient(135deg,#1e2935,#11151e);overflow:hidden}.hud:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 49.5%,#ffffff12 50%,transparent 50.5%),linear-gradient(0deg,transparent 49.5%,#ffffff12 50%,transparent 50.5%)}.hudbtn{position:absolute;border:2px solid #ffffffaa;border-radius:50%;display:grid;place-items:center;color:white;background:#ff4d6770;font-size:11px;font-weight:900;touch-action:none;user-select:none;cursor:grab;width:54px;height:54px}.hudbtn.fire{width:72px;height:72px;background:#ff4d67a8}.hudbtn.joy{left:9%;bottom:13%;width:68px;height:68px;background:#57e6e140}.hudbtn.jump{right:9%;bottom:35%}.hudbtn.scope{right:23%;bottom:19%}.hudbtn.fire{right:7%;bottom:8%}.hudbtn.crouch{right:28%;bottom:8%}.hudbtn:focus{outline:2px solid var(--cyan)}.guide{padding-left:20px;color:#dce1ec}.guide li{margin:10px 0;line-height:1.45}.footer{color:var(--muted);font-size:12px;text-align:center;padding:16px 8px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.panel{padding:22px}}
+</style>
+</head>
+<body>
+<header><div class="brand">AXLFF07 • GAMING TOOLS</div><h1>Axlff07 <span style="color:var(--hot)">Sensi</span></h1><p class="sub">Your Free Fire practice companion · Android-first prototype</p></header>
+<main>
+<nav class="tabs" aria-label="App sections">
+<button class="tab active" data-tab="sensi">Sensitivity</button><button class="tab" data-tab="hudtab">HUD guide</button><button class="tab" data-tab="settings">Settings</button><button class="tab" data-tab="practice">Practice tips</button>
+</nav>
+<section id="sensi" class="page">
+<div class="panel"><div class="eyebrow">Starter profile</div><h2>One-tap & drag headshots</h2><p class="note">A starting point to test—not guaranteed “perfect” settings. Change a little at a time in Training Ground.</p>
+<div class="grid" id="stats"></div><div class="actions"><button class="primary" id="reset">Reset starter values</button><button class="secondary" id="copy">Copy values</button></div><p class="note" id="feedback" aria-live="polite"></p></div>
+<div class="panel"><div class="eyebrow">Fine tune</div><h2>Sensitivity sliders</h2><div id="sliders"></div><p class="note">These are app-side notes only. The prototype does not change Free Fire settings automatically.</p></div>
+</section>
+<section id="hudtab" class="page hidden">
+<div class="panel"><div class="eyebrow">HUD playground</div><h2>Try a button layout</h2><p class="note">Drag the buttons to experiment. This is a mock layout, not an in-game overlay.</p>
+<div class="hud" id="hud"><div class="hudbtn joy" tabindex="0" draggable="false" style="left:9%;bottom:13%">MOVE</div><div class="hudbtn jump" tabindex="0" draggable="false">JUMP</div><div class="hudbtn scope" tabindex="0" draggable="false">SCOPE</div><div class="hudbtn crouch" tabindex="0" draggable="false">CROUCH</div><div class="hudbtn fire" tabindex="0" draggable="false">FIRE</div></div>
+<div class="actions"><button class="secondary" id="hudreset">Reset layout</button></div><p class="note">Tip: keep FIRE within comfortable thumb reach and avoid covering your view.</p></div>
+<div class="panel"><h2>Basic two-finger HUD tips</h2><ul class="guide"><li>Keep movement on the left and the main fire button on the right.</li><li>Make the fire button large enough to drag upward without losing contact.</li><li>Keep jump, crouch and scope separated so you don't tap the wrong control.</li><li>Test in Training Ground before changing ranked-match habits.</li></ul></div>
+</section>
+<section id="settings" class="page hidden">
+<div class="panel"><div class="eyebrow">Device profile</div><h2>Display & control notes</h2><div class="field"><label for="device">Phone</label><select id="device"><option>POCO C75 5G</option><option>Other Android phone</option><option>Tablet</option></select></div>
+<div class="field"><label for="style">Playing style</label><select id="style"><option>One-tap / drag headshots</option><option>Close-range rush</option><option>Balanced</option><option>Sniper / long range</option></select></div>
+<div class="field"><label for="graphics">Graphics starting point</label><select id="graphics"><option>Smooth / lowest stable graphics</option><option>Standard graphics</option><option>Highest stable frame rate available</option></select></div>
+<div class="field"><label for="fps">Frame rate</label><select id="fps"><option>Highest stable option available</option><option>Medium for cooler device</option><option>Prioritize battery life</option></select></div>
+<button class="primary" id="save">Save preferences on this device</button><p class="note" id="saved" aria-live="polite"></p></div>
+</section>
+<section id="practice" class="page hidden">
+<div class="panel"><div class="eyebrow">10-minute routine</div><h2>Train consistency, not magic numbers</h2><ol class="guide"><li><b>2 min:</b> warm up crosshair placement at head height.</li><li><b>3 min:</b> practice short upward drags with your preferred close-range weapon.</li><li><b>3 min:</b> alternate stationary and moving targets.</li><li><b>2 min:</b> record hit consistency and adjust one sensitivity value by 3–5 points.</li></ol><p class="note">Avoid macros, scripts, or tools that automate firing or modify the game client; they may violate game rules and risk your account.</p></div>
+</section>
+<div class="footer">Fan-made companion prototype · Not affiliated with or endorsed by Garena Free Fire.</div>
+</main>
+<script>
+const base={"General":190,"Red Dot":185,"2x Scope":175,"4x Scope":160,"Sniper Scope":100,"Free Look":150};
+let values={...base};
+const stats=document.querySelector('#stats'), sliders=document.querySelector('#sliders'), feedback=document.querySelector('#feedback');
+function render(){
+ stats.innerHTML='';sliders.innerHTML='';
+ for(const [name,val] of Object.entries(values)){
+  const s=document.createElement('div');s.className='stat';s.innerHTML='<label>'+name+'</label><strong>'+val+'</strong>';stats.append(s);
+  const row=document.createElement('div');row.className='sliderrow';
+  row.innerHTML='<div class="sliderhead"><label>'+name+'</label><output>'+val+'</output></div><input type="range" min="0" max="200" step="1" value="'+val+'" aria-label="'+name+' sensitivity">';
+  const input=row.querySelector('input'),out=row.querySelector('output');input.addEventListener('input',()=>{values[name]=Number(input.value);out.value=input.value;s.querySelector('strong').textContent=input.value;});sliders.append(row);
+ }
+}
+render();
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('hidden',p.id!==b.dataset.tab));}));
+document.querySelector('#reset').addEventListener('click',()=>{values={...base};render();feedback.textContent='Starter values restored.';});
+document.querySelector('#copy').addEventListener('click',async()=>{const txt=Object.entries(values).map(([k,v])=>k+': '+v).join('\\n');try{await navigator.clipboard.writeText(txt);feedback.textContent='Copied sensitivity values.';}catch(e){feedback.textContent=txt;}});
+const hud=document.querySelector('#hud');let drag=null,offset=[0,0];
+hud.querySelectorAll('.hudbtn').forEach(el=>{el.addEventListener('pointerdown',e=>{drag=el;const r=el.getBoundingClientRect(),p=hud.getBoundingClientRect();offset=[e.clientX-r.left,e.clientY-r.top];el.style.left=(r.left-p.left)/p.width*100+'%';el.style.top=(r.top-p.top)/p.height*100+'%';el.style.right='auto';el.style.bottom='auto';el.setPointerCapture(e.pointerId);});el.addEventListener('pointermove',e=>{if(drag!==el)return;const r=hud.getBoundingClientRect();el.style.left=Math.max(0,Math.min(100,(e.clientX-r.left-offset[0])/r.width*100))+'%';el.style.top=Math.max(0,Math.min(100,(e.clientY-r.top-offset[1])/r.height*100))+'%';});el.addEventListener('pointerup',()=>drag=null);el.addEventListener('pointercancel',()=>drag=null);});
+document.querySelector('#hudreset').addEventListener('click',()=>{location.reload();});
+document.querySelector('#save').addEventListener('click',()=>{const prefs={device:document.querySelector('#device').value,style:document.querySelector('#style').value,graphics:document.querySelector('#graphics').value,fps:document.querySelector('#fps').value};try{localStorage.setItem('axlff07-prefs',JSON.stringify(prefs));document.querySelector('#saved').textContent='Preferences saved on this browser.';}catch(e){document.querySelector('#saved').textContent='Storage unavailable in this browser; settings remain available while this page is open.';}});
+try{const p=JSON.parse(localStorage.getItem('axlff07-prefs')||'null');if(p){for(const k of ['device','style','graphics','fps'])if(p[k])document.querySelector('#'+k).value=p[k];}}catch(e){}
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) { window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {})); }
+</script>
+</body></html>
